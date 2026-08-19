@@ -64,7 +64,26 @@ Create `.codex-plugin/plugin.json` with this exact data:
   "name": "software-development-workflow",
   "version": "0.1.0",
   "description": "Route engineering execution tasks through project-aware planning, implementation, review, and verification.",
-  "skills": "./skills/"
+  "author": {
+    "name": "leslieliu099",
+    "url": "https://github.com/leslieliu099"
+  },
+  "repository": "https://github.com/leslieliu099/codex_skills",
+  "keywords": ["software-development", "code-review", "bug-fix", "refactoring"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Software Development Workflow",
+    "shortDescription": "Plan, implement, review, and verify software changes.",
+    "longDescription": "A project-aware engineering workflow with specialized feature, bug-fix, refactoring, and code-review skills.",
+    "developerName": "leslieliu099",
+    "category": "Developer Tools",
+    "capabilities": ["Write"],
+    "defaultPrompt": [
+      "Implement this feature using the project workflow.",
+      "Find and fix the root cause of this bug.",
+      "Review the current changes for defects and risks."
+    ]
+  }
 }
 ```
 
@@ -88,9 +107,9 @@ Run:
 ```bash
 python3 /Users/liuwenwen/.codex/skills/.system/skill-creator/scripts/generate_openai_yaml.py \
   skills/development-orchestrator \
-  --interface display_name="Development Orchestrator" \
-  --interface short_description="Route engineering work through planning and verification" \
-  --interface default_prompt="Execute this engineering task using the project-aware development workflow."
+  --interface 'display_name=Development Orchestrator' \
+  --interface 'short_description=Route engineering work through planning and verification' \
+  --interface 'default_prompt=Use $development-orchestrator to execute this engineering task with project-aware planning and verification.'
 ```
 
 - [ ] **Step 6: Run GREEN and REFACTOR evaluations**
@@ -135,7 +154,7 @@ The body must require: acceptance behavior and scope; relevant code and applicab
 
 - [ ] **Step 3: Generate metadata and run GREEN/REFACTOR**
 
-Generate `agents/openai.yaml` with display name `Feature Development`, short description `Implement features with scoped plans and evidence`, and a default prompt that asks to implement the feature using existing project patterns. Re-run the scenarios with the skill, close observed loopholes, and record evidence.
+Generate `agents/openai.yaml` with display name `Feature Development`, short description `Implement features with scoped plans and evidence`, and default prompt `Use $feature-dev to implement this feature using existing project patterns.` Re-run the scenarios with the skill, close observed loopholes, and record evidence.
 
 - [ ] **Step 4: Validate and commit**
 
@@ -165,7 +184,7 @@ The body must distinguish Symptom / Root Cause / Fix; require reproduction or eq
 
 - [ ] **Step 3: Generate metadata and run GREEN/REFACTOR**
 
-Use display name `Bug Fix`, short description `Prove root causes and deliver regression-tested fixes`, and a root-cause-focused default prompt. Repeat evaluator scenarios until the skill refuses symptom-only patches and records honest limitations when reproduction is unavailable.
+Use display name `Bug Fix`, short description `Prove root causes and deliver regression-tested fixes`, and default prompt `Use $bug-fix to prove the root cause and implement a regression-tested fix.` Repeat evaluator scenarios until the skill refuses symptom-only patches and records honest limitations when reproduction is unavailable.
 
 - [ ] **Step 4: Validate and commit**
 
@@ -195,7 +214,7 @@ The body must require explicit invariants; characterization tests or an alternat
 
 - [ ] **Step 3: Generate metadata and run GREEN/REFACTOR**
 
-Use display name `Behavior-Preserving Refactor`, short description `Refactor structure while proving behavior is unchanged`, and an invariant-focused default prompt. Repeat scenarios until independent fixes are deferred and missing tests cause a proof strategy rather than an unsupported completion claim.
+Use display name `Behavior-Preserving Refactor`, short description `Refactor structure while proving behavior is unchanged`, and default prompt `Use $refactor to improve this structure while preserving observable behavior.` Repeat scenarios until independent fixes are deferred and missing tests cause a proof strategy rather than an unsupported completion claim.
 
 - [ ] **Step 4: Validate and commit**
 
@@ -225,7 +244,7 @@ The body must default to read-only; inspect status/diff and applicable rules; in
 
 - [ ] **Step 3: Generate metadata and run GREEN/REFACTOR**
 
-Use display name `Code Review`, short description `Review changes for defects, regressions, and missing tests`, and a findings-first default prompt. Repeat scenarios until the skill suppresses low-value style noise, does not edit files, and clearly reports clean reviews.
+Use display name `Code Review`, short description `Review changes for defects, regressions, and missing tests`, and default prompt `Use $code-review to review these changes for defects, regressions, and missing tests.` Repeat scenarios until the skill suppresses low-value style noise, does not edit files, and clearly reports clean reviews.
 
 - [ ] **Step 4: Validate and commit**
 
