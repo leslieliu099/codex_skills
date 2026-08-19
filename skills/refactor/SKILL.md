@@ -38,6 +38,8 @@ Validate the plan before edits:
 
 Correct the plan before implementation.
 
+When equivalence depends on framework, library, SDK, database, or configuration behavior, determine the project version and use version-matching official documentation. If unavailable, require authoritative pinned artifacts plus executable evidence or narrow the preservation claim.
+
 ## Refactor in Verified Steps
 
 1. Confirm the characterization evidence passes against the original behavior.
@@ -48,6 +50,8 @@ Correct the plan before implementation.
 6. Inspect Git status and diff for behavior changes, unrelated cleanup, debug code, temporary files, and pre-existing work.
 
 Maintain an **Invariant/Plan Item → Changed Files → Fresh Verification** ledger. Do not claim behavior preservation for an item without before/after evidence.
+
+If intended edits cannot be separated safely from pre-existing user changes, stop and ask. After two evidence-based refactor steps fail their invariant checks, stop editing and revalidate the baseline and plan before continuing with new evidence.
 
 ## Bugs and Features Found Mid-Refactor
 

@@ -31,9 +31,9 @@ Validate the plan for missing layers, tests, migrations, authorization, error st
 1. Write or update the narrowest test that demonstrates the next acceptance behavior; confirm it fails for the missing behavior when feasible.
 2. Implement the minimum production change using existing project helpers and conventions.
 3. Run the focused test immediately. Repeat per behavior instead of accumulating an unverified batch.
-4. Use the project version and version-matching official documentation for dependency/API/configuration details. Do not upgrade merely because current examples target a newer version. State when official verification is unavailable.
+4. Use the project version and version-matching official documentation for dependency/API/configuration details. Do not upgrade merely because current examples target a newer version. If official docs are unavailable, proceed only when authoritative pinned artifacts plus executable evidence establish the required semantics; otherwise stop and report the unresolved contract.
 5. Run relevant project-native tests plus available lint, format, type, build, migration, or configuration checks. Do not invent commands the project does not have.
-6. Inspect Git status and diff. Preserve pre-existing work and remove unrelated feature edits, debug code, and temporary files from your patch.
+6. Inspect Git status and diff. Preserve pre-existing work and exclude only unrelated edits you introduced, plus your debug code and temporary files. If intended edits cannot be separated safely from user changes in a mixed hunk, stop and ask rather than deleting or overwriting it.
 
 ## Completion Ledger
 

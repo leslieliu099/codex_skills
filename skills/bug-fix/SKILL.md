@@ -38,6 +38,8 @@ Before production edits, state:
 
 Validate the plan for speculative edits, missed callers/layers, weakened semantics, unnecessary cleanup, and a smaller causal fix. Correct it before implementation.
 
+When the fix depends on framework, library, SDK, database, or configuration behavior, determine the project version and use version-matching official documentation. If unavailable, require authoritative pinned artifacts plus executable evidence or keep the relevant claim unverified.
+
 ## Implement and Verify
 
 1. Add the narrowest regression test or executable reproduction; confirm it fails for the observed defect.
@@ -47,6 +49,8 @@ Validate the plan for speculative edits, missed callers/layers, weakened semanti
 5. Map every plan item to exact changed files and fresh evidence.
 
 When production action would help containment, describe it separately and request or confirm authorization at action time. Permission to fix code is not permission to deploy instrumentation, change traffic, flip flags, rollback, or run a canary.
+
+If intended edits cannot be separated safely from pre-existing user changes, stop and ask. After two evidence-based correction attempts fail, stop editing and revisit root cause and Plan Validation; resume only with new evidence and a revised hypothesis.
 
 ## Pressure Rules
 
