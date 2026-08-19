@@ -1,0 +1,4 @@
+interface:
+  display_name: "Behavior-Preserving Refactor"
+  short_description: "Refactor structure while proving behavior is unchanged"
+  default_prompt: "Use $refactor to improve this structure while preserving observable behavior."
