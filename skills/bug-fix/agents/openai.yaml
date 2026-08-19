@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bug Fix"
+  short_description: "Prove root causes and deliver regression-tested fixes"
+  default_prompt: "Use $bug-fix to prove the root cause and implement a regression-tested fix."
