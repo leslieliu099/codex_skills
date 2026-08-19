@@ -1,0 +1,32 @@
+{
+  "name": "software-development-workflow",
+  "version": "0.1.0",
+  "description": "Route engineering execution tasks through project-aware planning, implementation, review, and verification.",
+  "author": {
+    "name": "leslieliu099",
+    "url": "https://github.com/leslieliu099"
+  },
+  "repository": "https://github.com/leslieliu099/codex_skills",
+  "keywords": [
+    "software-development",
+    "code-review",
+    "bug-fix",
+    "refactoring"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Software Development Workflow",
+    "shortDescription": "Plan, implement, review, and verify software changes.",
+    "longDescription": "A project-aware engineering workflow with specialized feature, bug-fix, refactoring, and code-review skills.",
+    "developerName": "leslieliu099",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Implement this feature using the project workflow.",
+      "Find and fix the root cause of this bug.",
+      "Review the current changes for defects and risks."
+    ]
+  }
+}

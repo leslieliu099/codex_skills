@@ -1,0 +1,4 @@
+interface:
+  display_name: "Development Orchestrator"
+  short_description: "Route engineering work through planning and verification"
+  default_prompt: "Use $development-orchestrator to execute this engineering task with project-aware planning and verification."
