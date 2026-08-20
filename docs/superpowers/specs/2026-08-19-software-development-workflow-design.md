@@ -12,12 +12,15 @@
 - 提供 `feature-dev`、`bug-fix`、`refactor`、`code-review` 四个专业 skill。
 - 不依赖 Superpowers 或其他第三方插件，单独安装即可运行。
 - 遵循当前项目事实和适用的 `AGENTS.md`，不把特定技术栈或业务结构写死。
+- 在 0→1 项目中建立最小、可持续维护的需求、架构、README、`AGENTS.md` 和 MVP 验收基线；在已有项目中优先复用现有文档约定。
+- 让已确认需求、实质架构变化、仓库使用方式和验收证据与代码演进同步，而不是依赖会话记忆。
 - 所有代码修改在实施前有计划，在交付前有可复核的验证证据。
 - 以个人本地插件安装，同时保留独立 Git 源码仓库，便于升级、迁移和后续分发。
 
 ## 非目标
 
-- 不为每个项目自动创建 `AGENTS.md`、ADR、CHANGELOG 或完整架构文档。
+- 不为已有项目或小改动机械创建标准文档集，不重复已有 canonical 文档。
+- 不默认创建 ADR、CHANGELOG、runbook、安全文档或完整数据模型；仅在项目特征和决策风险确实需要时创建。
 - 不强制项目采用某种分层、测试框架、构建工具或 Git 分支策略。
 - 不接管普通问答，也不把一次项目中的业务事实固化为全局规则。
 - 不承诺基于自然语言描述的隐式 skill 匹配达到传统程序路由器式的 100% 命中率。
@@ -35,6 +38,7 @@ software-development-workflow/
 ├── skills/
 │   ├── development-orchestrator/
 │   │   ├── SKILL.md
+│   │   ├── references/project-documentation.md
 │   │   └── agents/openai.yaml
 │   ├── feature-dev/
 │   │   ├── SKILL.md
@@ -89,17 +93,20 @@ Codex 根据 skill 的 `description` 进行隐式匹配。`development-orchestra
 `development-orchestrator` 执行以下生命周期：
 
 1. 确认请求属于工程执行任务，并确定允许的修改范围。
-2. 定位项目根目录和从根到目标文件最近适用的 `AGENTS.md`。
-3. 按 Project → Module → Domain → Feature → Code 渐进式收集事实。
+2. 定位项目根目录，读取从根到目标文件最近适用的 `AGENTS.md`，并发现 README、需求、架构、验收及其 canonical 指针。
+3. 按 Project → Module → Domain → Feature → Code 渐进式收集事实；先复用已有文档，不按默认文件名创建副本。
 4. 分类任务；混合任务形成有顺序的阶段。
-5. 制定包含任务理解、相关文件、现有模式、拟议改动、依赖影响、测试策略和风险的 Plan。
-6. 自检 Plan，检查遗漏、不必要修改、兼容性、项目模式和文档需求。
-7. 在外部 API、框架、依赖、配置或版本差异影响实现时核对官方文档。
-8. 按专业 skill 实施，每个重要改动后执行尽可能小而相关的验证。
-9. 建立 Plan Item → Changed Files → Verification 对照，未映射项目不得标记完成。
-10. 运行项目实际存在且与改动相关的测试、lint、format、类型检查、构建或配置校验。
-11. 检查 Git 状态与 diff，识别无关改动、调试代码、临时文件、兼容性和未验证修改。
-12. 仅在验证证据支持时宣布完成；否则明确失败项、原因、关联性和剩余风险。
+5. 0→1 项目在规划初期选择或初始化需求、架构、README、根 `AGENTS.md` 和 MVP 验收基线；已有项目的小改动只评估文档影响。
+6. 制定包含任务理解、相关文件、现有模式、拟议改动、依赖影响、文档影响、测试策略和风险的 Plan。
+7. 自检 Plan，检查遗漏、不必要修改、兼容性、项目模式、文档漂移和验收可观察性。
+8. 用户确认实质需求决策后更新 living requirements；未确认问题保持为 Open Questions。
+9. 在外部 API、框架、依赖、配置或版本差异影响实现时核对官方文档。
+10. 按专业 skill 实施，每个重要改动后执行尽可能小而相关的验证。
+11. 基于已验证实现同步实质架构变化、README 使用信息、稳定 `AGENTS.md` 规则和 MVP 验收证据。
+12. 建立 Plan Item → Changed Files → Verification 对照，包含 Documentation Impact；未映射项目不得标记完成。
+13. 运行项目实际存在且与改动相关的测试、lint、format、类型检查、构建或配置校验。
+14. 检查 Git 状态与 diff，识别无关改动、调试代码、临时文件、文档漂移、验收状态夸大、兼容性和未验证修改。
+15. 仅在验证证据支持时宣布完成；否则明确失败项、原因、关联性和剩余风险。
 
 ## 专业 Skill 职责
 
@@ -121,11 +128,23 @@ Codex 根据 skill 的 `description` 进行隐式匹配。`development-orchestra
 
 ## 项目理解与 AGENTS.md
 
-事实来源优先级为：当前代码和配置、适用的 `AGENTS.md`、测试、README 和项目文档、Git 历史、官方文档、通用知识。
+事实来源优先级为：用户已确认决策、当前代码和配置、适用的 `AGENTS.md`、测试、canonical README/需求/架构/验收文档、Git 历史、官方文档、通用知识。文档与实现冲突时必须暴露漂移，不能静默选择更方便的一方。
 
 skill 自动识别项目根目录，检查与任务相关的构建文件、测试配置、CI、迁移、lint 和 formatter。它不扫描整个仓库，也不假设 Java、Spring Boot、React 或任何固定技术栈。
 
-`AGENTS.md` 规则从项目根向目标文件所在目录继承，越近的适用规则优先。没有 `AGENTS.md` 时继续工作；只有发现长期稳定且值得固化的规则时，才在最终建议中提出创建它。
+`AGENTS.md` 规则从项目根向目标文件所在目录继承，越近的适用规则优先。已有项目缺失时可以继续工作，不因普通修改自动创建；仅在用户授权的 0→1 项目中初始化最小根文件，并且只记录稳定的项目事实、canonical 文档指针、验证命令、完成定义和安全边界，不写业务需求、临时计划或会话记录。
+
+## 项目文档生命周期
+
+详细规则位于 `skills/development-orchestrator/references/project-documentation.md`，只在 0→1 或存在文档影响时按需加载。默认 canonical 文件仅适用于没有既有约定的新项目：`README.md`、`AGENTS.md`、`docs/requirements.md`、`docs/architecture.md`、`docs/acceptance.md`。
+
+- Requirements 是最新确认结果，不是分析过程日志。可测试需求使用稳定 `REQ-*` ID，并以简明 Change Log 记录已确认变更和决策方。
+- Architecture 只在系统边界、组件职责、接口、依赖、数据所有权、关键数据流或运行拓扑发生实质变化时同步。
+- README 自动发现根和受影响模块文件，只同步真实、已验证的安装、启动、配置、测试、入口和文档导航。
+- `AGENTS.md` 始终先读；更新只针对长期稳定的 agent-facing 规则和指针。
+- MVP acceptance 在规划初期建立，验收项使用稳定 `ACC-*` ID 并关联需求 ID。整体状态为 `DRAFT → READY → PARTIALLY_VERIFIED → VERIFIED → ACCEPTED`。
+- Codex 只能凭新鲜证据标记 `VERIFIED`；`ACCEPTED` 必须由文档指定的验收方明确确认，测试通过不能替代业务批准。
+- ADR、API contract、data model、runbook、迁移/回滚和安全说明按条件创建，不作为每个项目的固定清单。
 
 ## 官方文档与版本
 
@@ -162,13 +181,14 @@ skill 自动识别项目根目录，检查与任务相关的构建文件、测�
 - 专业 skill 被直接匹配时仍执行 Plan 和 Verification 的兜底场景。
 - 文档不可访问、测试失败、缺少构建命令和脏工作区等失败披露场景。
 - 每个 Plan Item 都映射到改动文件与验证证据的完整性场景。
+- 空项目初始化、已有非标准文档发现、小 Bug 无需建文档、跨层功能同步、重构架构影响、只读 Review 文档漂移、部分验收与明确接受权限场景。
 - 从个人本地 marketplace 安装后，在新会话中用代表性自然语言请求进行匹配验证。
 
 行为验证发现的问题必须回写到对应 skill，并重新执行相关场景。测试材料保留在源码仓库中，便于后续版本回归。
 
 ## 本地安装与版本管理
 
-当前源码工作副本位于 `/Users/liuwenwen/Documents/Codex/2026-08-19/superpowers-plugin-superpowers-openai-api-curated/outputs/software-development-workflow`，并作为独立 Git 仓库管理；后续可克隆或移动到任意个人开发目录。插件 manifest 使用稳定的 kebab-case 名称 `software-development-workflow`。通过个人本地 marketplace 安装，使其对后续项目可用；源码仓库保持为唯一编辑来源，不直接修改安装缓存。
+当前 canonical 源码仓库位于 `/Users/liuwenwen/Documents/codex/codex_skills`，远端为 `https://github.com/leslieliu099/codex_skills.git`。插件 manifest 使用稳定的 kebab-case 名称 `software-development-workflow`。通过个人本地 marketplace 安装，使其对后续项目可用；Git 仓库保持为唯一编辑来源，不直接修改安装缓存。
 
 升级流程为：修改源码 → 执行静态与行为验证 → 更新插件版本 → 刷新个人 marketplace 安装 → 在新会话中进行冒烟测试 → 提交 Git 变更。
 
@@ -178,6 +198,9 @@ skill 自动识别项目根目录，检查与任务相关的构建文件、测�
 - 自然语言工程执行请求能够匹配统一入口或安全的专业兜底流程。
 - 普通解释和咨询不被设计为自动触发目标。
 - 单一和混合任务均产生清晰边界、Plan、Plan Validation 和逐项验证映射。
+- 0→1 项目会先建立最小 canonical 文档和 MVP 验收基线；已有项目不会因文件名不同产生重复文档。
+- 已确认需求、实质架构变化、README/`AGENTS.md` 影响和验收证据在对应同步点更新；无影响时有明确 no-change 理由。
+- `VERIFIED` 具有新鲜证据，`ACCEPTED` 具有明确验收方批准记录。
 - 官方文档检查以项目版本为准，失败时如实披露。
 - Review 默认只读并以严重程度优先输出问题。
 - 本地安装不依赖 Superpowers，源码可由 Git 独立管理。

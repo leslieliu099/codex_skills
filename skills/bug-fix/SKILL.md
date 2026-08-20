@@ -19,7 +19,7 @@ Do not label a symptom guard, rollback correlation, or plausible guess as root c
 
 ## Investigate Before Editing
 
-1. Read applicable `AGENTS.md`, complete errors/traces, related tests, recent changes, and the narrow execution path.
+1. Read applicable `AGENTS.md`, complete errors/traces, related tests, recent changes, the narrow execution path, and any canonical requirement, architecture, README, or acceptance document that defines the expected behavior.
 2. Reproduce the symptom or create equivalent failing evidence. If intermittent or external, gather logs, metrics, or boundary observations instead of guessing.
 3. List competing hypotheses and the evidence that would distinguish them. Test one variable at a time, strongest evidence first.
 4. Trace bad state backward to its origin. Fix at the owning boundary; avoid a downstream null guard, broad catch, retry, or default value unless that is the verified contract.
@@ -33,6 +33,7 @@ Before production edits, state:
 - smallest proposed fix and exact area affected;
 - compatibility, data, API, concurrency, security, and operational risks that apply;
 - regression-test strategy and surrounding checks;
+- documentation impact, including whether the defect reveals drift in requirements, architecture, usage instructions, or existing acceptance evidence;
 - existing user changes to preserve;
 - authorization boundary for local edits versus deploy, rollback, feature flag, canary, merge, or other external mutation.
 
@@ -47,6 +48,7 @@ When the fix depends on framework, library, SDK, database, or configuration beha
 3. Run the regression immediately, then relevant surrounding tests and available lint, type, build, integration, or configuration checks.
 4. Reproduce the original path again when feasible. Inspect Git status and diff; preserve pre-existing work and exclude unrelated edits.
 5. Map every plan item to exact changed files and fresh evidence.
+6. Synchronize only affected canonical documents. A narrow fix normally requires no new project documents; update an existing requirement, README, architecture map, or acceptance criterion only when the verified fix or confirmed contract changes its content. Never mark the MVP `ACCEPTED` from regression evidence.
 
 When production action would help containment, describe it separately and request or confirm authorization at action time. Permission to fix code is not permission to deploy instrumentation, change traffic, flip flags, rollback, or run a canary.
 

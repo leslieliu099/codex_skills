@@ -9,7 +9,7 @@ Change structure while proving that observable behavior remains the same.
 
 ## Define the Contract First
 
-Read applicable `AGENTS.md`, the target code, callers, tests, public API, configuration, and recent history. State the observable invariants that must survive, including applicable:
+Read applicable `AGENTS.md`, canonical architecture and requirements documents, the target code, callers, tests, public API, configuration, and recent history. State the observable invariants that must survive, including applicable:
 
 - outputs, accepted and rejected inputs, and error identity;
 - ordering, timing, retries, side effects, persistence, and external calls;
@@ -26,7 +26,7 @@ If a representative baseline cannot be obtained, limit the claim to the cases ac
 
 ## Plan and Validate
 
-State the target, Before structure, After structure, exact scope, invariants, evidence strategy, small edit sequence, affected files, compatibility risks, and exclusions.
+State the target, Before structure, After structure, exact scope, invariants, evidence strategy, small edit sequence, affected files, documentation impact, compatibility risks, and exclusions.
 
 Validate the plan before edits:
 
@@ -48,6 +48,7 @@ When equivalence depends on framework, library, SDK, database, or configuration 
 4. Continue only while evidence remains green.
 5. Run relevant project-native tests and available lint, format, type, build, integration, or performance checks.
 6. Inspect Git status and diff for behavior changes, unrelated cleanup, debug code, temporary files, and pre-existing work.
+7. Synchronize the canonical architecture document only when the refactor materially changes boundaries, component responsibilities, dependencies, data ownership, important flows, or runtime topology. Internal extraction or renaming usually needs no architecture update; record that no-change reason in the ledger.
 
 Maintain an **Invariant/Plan Item → Changed Files → Fresh Verification** ledger. Do not claim behavior preservation for an item without before/after evidence.
 

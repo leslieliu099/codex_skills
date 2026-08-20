@@ -1,6 +1,6 @@
 {
   "name": "software-development-workflow",
-  "version": "0.1.0",
+  "version": "0.1.0+codex.20260820141115",
   "description": "Route engineering execution tasks through project-aware planning, implementation, review, and verification.",
   "author": {
     "name": "leslieliu099",
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "Software Development Workflow",
     "shortDescription": "Plan, implement, review, and verify software changes.",
-    "longDescription": "A project-aware engineering workflow with specialized feature, bug-fix, refactoring, and code-review skills.",
+    "longDescription": "A project-aware engineering workflow with living requirements, architecture, README, AGENTS, MVP acceptance, and specialized feature, bug-fix, refactoring, and code-review skills.",
     "developerName": "leslieliu099",
     "category": "Developer Tools",
     "capabilities": [

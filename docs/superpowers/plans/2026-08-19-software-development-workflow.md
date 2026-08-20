@@ -14,6 +14,7 @@
 
 - `.codex-plugin/plugin.json`: plugin identity, semantic version, description, and skills root.
 - `skills/development-orchestrator/SKILL.md`: execution-task trigger, project discovery, routing, plan validation, cross-skill completion gate.
+- `skills/development-orchestrator/references/project-documentation.md`: canonical document discovery, 0→1 initialization, synchronization points, acceptance state and authority rules.
 - `skills/feature-dev/SKILL.md`: feature-specific scope, existing-pattern, test, implementation, and delivery rules.
 - `skills/bug-fix/SKILL.md`: reproduction, root-cause proof, minimal correction, and regression rules.
 - `skills/refactor/SKILL.md`: invariant definition, behavior-preserving edits, and equivalence evidence.
@@ -330,3 +331,35 @@ If there is nothing new to commit, record that fact instead of creating an empty
 - [ ] **Step 4: Deliver**
 
 Report the source repository, installed plugin location, five skill responsibilities, automatic routing behavior, verification commands and results, Git commits, known implicit-selection limitation, and any failed or unobservable check.
+
+### Task 9: Living Project Documentation Enhancement (2026-08-20)
+
+**Files:**
+- Create: `skills/development-orchestrator/references/project-documentation.md`
+- Create: `tests/behavioral-scenarios/project-documentation.md`
+- Modify: orchestrator and all four specialist `SKILL.md` files
+- Modify: plugin description, design, integration evidence, and orchestrator UI metadata
+
+- [x] **Step 1: Preserve the five-skill routing model**
+
+Keep documentation lifecycle ownership inside `development-orchestrator`; do not add a broad sixth auto-trigger that overlaps every engineering task.
+
+- [x] **Step 2: Define discovery and 0→1 defaults**
+
+Prefer existing canonical project files. Use `README.md`, `AGENTS.md`, `docs/requirements.md`, `docs/architecture.md`, and `docs/acceptance.md` only when initializing a project with no convention.
+
+- [x] **Step 3: Define synchronization and authority rules**
+
+Synchronize confirmed requirements, material architecture changes, verified README usage, durable `AGENTS.md` guidance, and acceptance evidence. Codex may mark `VERIFIED`; only explicit acceptance authority may mark `ACCEPTED`.
+
+- [x] **Step 4: Add specialist documentation-impact behavior**
+
+Require each execution plan and ledger to identify changed canonical files or provide a concrete no-change reason. Keep review read-only and keep small bug/refactor tasks free from mandatory document generation.
+
+- [x] **Step 5: Add regression scenarios**
+
+Cover empty projects, existing non-standard document paths, narrow bug fixes, cross-layer features, internal refactors, read-only reviews, and partial/final acceptance state transitions.
+
+- [x] **Step 6: Validate and refresh the personal installation**
+
+Run all five skill validators, plugin validation, diff and placeholder checks; then update the cachebuster through the supported helper, refresh the personal marketplace source, reinstall, and inspect the installed cache from fresh command output.

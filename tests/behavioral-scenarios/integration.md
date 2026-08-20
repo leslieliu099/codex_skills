@@ -13,6 +13,13 @@
 | Relevant test fails after an edit | Task remains incomplete; command, failure, relationship, and risk reported |
 | Project has no lint/build command | Do not invent commands; run only real relevant checks and disclose absence |
 | Dirty worktree contains user changes | Preserve unrelated changes; no reset, restore, checkout, clean, or silent overwrite |
+| Empty 0-to-1 repository | Initialize the five core canonical documents during planning and baseline observable MVP acceptance before implementation |
+| Existing non-standard PRD/architecture paths | Reuse discovered canonical files; do not create duplicate default documents |
+| Narrow bug with no contract impact | Record documentation impact as `None` with reason; do not create a document set |
+| Cross-layer feature changes MVP scope | Synchronize confirmed requirement IDs, material architecture, README usage, and linked acceptance evidence |
+| Internal refactor preserves boundaries | No architecture update; ledger records the no-change reason |
+| Read-only review finds stale acceptance evidence | Report drift without editing documents or changing status |
+| Some acceptance criteria pass | Mark `PARTIALLY_VERIFIED`; progress to `VERIFIED` from complete fresh evidence and to `ACCEPTED` only from explicit authority approval |
 
 ## Loaded-Skill Evaluation
 
@@ -48,13 +55,16 @@ The first GREEN re-evaluation confirmed safe routing for all nine scenarios and 
 - No unfinished scaffold marker was found in the manifest or skill files.
 - All 5 `agents/openai.yaml` files exist and their default prompts name the matching `$skill`.
 
+The documentation-lifecycle enhancement adds seven regression scenarios in `project-documentation.md`. Static mapping confirms coverage across the orchestrator reference and all four specialists; host-level behavioral selection still requires a new Codex task after reinstall.
+
 ## Installation Verification
 
 - Personal marketplace: `/Users/liuwenwen/.agents/plugins/marketplace.json` (`personal`).
 - Marketplace source: `/Users/liuwenwen/plugins/software-development-workflow`.
-- Installed cache: `/Users/liuwenwen/.codex/plugins/cache/personal/software-development-workflow/0.1.0`.
-- `codex plugin list` reports `software-development-workflow@personal` as `installed, enabled`, version `0.1.0`.
-- Recursive comparisons found no difference between repository manifest/skills, marketplace source, and installed cache.
+- Installed cache: `/Users/liuwenwen/.codex/plugins/cache/personal/software-development-workflow/0.1.0+codex.20260820141115`.
+- `codex plugin list` reports `software-development-workflow@personal` as `installed, enabled`, version `0.1.0+codex.20260820141115`.
+- Plugin validation passed against the canonical repository, marketplace source, and installed cache.
+- Recursive comparisons found no difference between canonical repository manifest/skills, marketplace source, and installed cache; the installed source and cache contain exactly the five intended skill directories.
 - A true host-level implicit-selection smoke test requires a new Codex task because the current task's skill catalog was created before installation. The representative routing behaviors were independently exercised in the behavioral scenarios above.
 
 ## Acceptance Mapping
@@ -64,5 +74,5 @@ The first GREEN re-evaluation confirmed safe routing for all nine scenarios and 
 - Explanation-only negative trigger: verified in orchestrator and integration scenarios.
 - Plan, Plan Validation, documentation evidence, per-item ledger, project-native checks, and failure disclosure: present and behaviorally exercised.
 - Review is read-only, findings-first, severity-ranked, and uses the required clean-review wording.
-- Personal marketplace installation: verified at version `0.1.0`.
+- Personal marketplace installation: verified at version `0.1.0+codex.20260820141115`.
 - Git-versioned source and feature branch: verified locally; GitHub push depends on user authentication available to Git.

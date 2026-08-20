@@ -5,7 +5,7 @@ description: Use when a request asks Codex to implement a feature, fix a defect,
 
 # Development Orchestrator
 
-Route engineering execution through project facts, a validated plan, specialist discipline, and fresh verification evidence.
+Route engineering execution through project facts, living project documents, a validated plan, specialist discipline, and fresh verification evidence.
 
 ## Entry Gate
 
@@ -15,14 +15,16 @@ User authorization sets the boundary. Permission to edit code does not imply per
 
 ## Workflow
 
-1. **Understand:** Find the project root and relevant files. Read applicable `AGENTS.md` files from root to the target; the nearest applicable rule wins. Inspect only the relevant path: Project → Module → Domain → Feature → Code.
+1. **Understand:** Find the project root and relevant files. Read applicable `AGENTS.md` files from root to the target; the nearest applicable rule wins. Discover relevant README, requirements, architecture, acceptance, and linked project documents before creating alternatives. Inspect only the relevant path: Project → Module → Domain → Feature → Code.
 2. **Classify:** Select one or more specialist workflows. For mixed work, define phases and dependencies before editing.
-3. **Plan:** State the plan before modifications. It may be concise and in chat, but must cover task understanding, relevant files/modules, existing patterns, proposed changes, dependency/API/database/frontend/config impact, test strategy, and risks. For read-only review, use target, intent, risk surfaces, checks, and exclusions instead of proposed edits.
-4. **Validate Plan:** Check for missed layers or tests, unnecessary work, compatibility risks, project-pattern conflicts, a smaller safe scope, and external documentation needs. Correct the plan before implementation. Ask the user only when a material business choice cannot be inferred. One combined plan may satisfy both orchestrator and specialist gates when it includes every required field.
-5. **Verify Documentation:** When behavior depends on a framework, library, SDK, CLI, configuration, database, or service, determine the project version and check version-matching official documentation. If unavailable, disclose the gap and limit claims; memory is not verification. Proceed only when authoritative pinned artifacts plus executable project evidence establish the required semantics. Stop when material behavior remains unresolved.
-6. **Implement:** Follow the specialist workflow and existing codebase patterns. Preserve unrelated and pre-existing changes. Verify each important change before continuing.
-7. **Test and Review:** Run relevant project-native tests and available lint, format, type, build, or configuration checks. Inspect Git status and diff for omissions, unrelated edits, debug code, temporary files, and compatibility issues.
-8. **Deliver:** Reconcile every plan item with changed files and fresh evidence. Report failures, skipped checks, and residual risk honestly.
+3. **Baseline Documents:** Read [references/project-documentation.md](references/project-documentation.md) for a 0-to-1 project or when confirmed requirements, architecture, repository usage, or acceptance evidence may change. In 0-to-1 work, select or initialize the canonical requirements, architecture, README, root `AGENTS.md`, and MVP acceptance files. In an established project, use its existing conventions and do not create a default document set for a narrow change.
+4. **Plan:** State the plan before modifications. It may be concise and in chat, but must cover task understanding, relevant files/modules, existing patterns, proposed changes, dependency/API/database/frontend/config impact, documentation impact, test strategy, and risks. For read-only review, use target, intent, risk surfaces, checks, documentation drift, and exclusions instead of proposed edits. For 0-to-1 work, baseline observable MVP acceptance criteria before implementation.
+5. **Validate Plan:** Check for missed layers, documents, or tests; unnecessary work; compatibility risks; project-pattern conflicts; a smaller safe scope; and external documentation needs. Correct the plan before implementation. Ask the user only when a material business choice cannot be inferred. Synchronize only user-confirmed requirement decisions; keep unresolved questions separate. One combined plan may satisfy both orchestrator and specialist gates when it includes every required field.
+6. **Verify External Documentation:** When behavior depends on a framework, library, SDK, CLI, configuration, database, or service, determine the project version and check version-matching official documentation. If unavailable, disclose the gap and limit claims; memory is not verification. Proceed only when authoritative pinned artifacts plus executable project evidence establish the required semantics. Stop when material behavior remains unresolved.
+7. **Implement:** Follow the specialist workflow and existing codebase patterns. Preserve unrelated and pre-existing changes. Verify each important change before continuing.
+8. **Synchronize Project Documents:** Update only affected canonical documents after verified changes. Requirements track confirmed decisions; architecture tracks material structural changes; README tracks verified usage; `AGENTS.md` tracks durable agent instructions; acceptance tracks criterion evidence. Codex may mark `VERIFIED` from fresh evidence but may mark `ACCEPTED` only after explicit approval by the recorded authority.
+9. **Test and Review:** Run relevant project-native tests and available lint, format, type, build, or configuration checks. Inspect Git status and diff for omissions, unrelated edits, debug code, temporary files, documentation drift, acceptance overstatement, and compatibility issues.
+10. **Deliver:** Reconcile every plan item, including documentation impact, with changed files and fresh evidence. Report the current acceptance state, failures, skipped checks, and residual risk honestly.
 
 ## Routing
 
@@ -44,6 +46,7 @@ Maintain this mapping during execution:
 | Plan item | Changed files | Verification |
 | --- | --- | --- |
 | Concrete planned outcome | Exact paths, or `None` for read-only review | Fresh command, test, inspection, or documented limitation |
+| Documentation impact | Exact canonical paths, or `None` with reason | Diff inspection, verified command, acceptance evidence, or explicit approval |
 
 Do not mark the task complete while a plan item lacks implementation or verification evidence. Do not report a command as passing unless it was run and its current output was checked.
 
@@ -55,6 +58,8 @@ Do not mark the task complete while a plan item lacks implementation or verifica
 | “Focused tests are enough, so no ledger is needed.” | Focus test scope when appropriate; still map every plan item to files and evidence. |
 | “Fixing production implies permission to deploy.” | Stop at the authorized boundary and report the next external action. |
 | “The usual pattern is obvious.” | Confirm the relevant project pattern before introducing or changing structure. |
+| “Every task should generate the standard documents.” | Discover existing sources first; initialize the core set only for 0-to-1 work and record `None` with reason for unaffected documents. |
+| “All tests pass, so the MVP is accepted.” | Record `VERIFIED` with evidence; only the named authority can confirm `ACCEPTED`. |
 
 ## Stop Conditions
 

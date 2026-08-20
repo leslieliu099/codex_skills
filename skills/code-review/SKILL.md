@@ -9,10 +9,10 @@ Find actionable defects and risks in the requested change. Default to read-only;
 
 ## Establish the Review Target
 
-1. Read applicable `AGENTS.md` and project guidance.
+1. Read applicable `AGENTS.md`, project guidance, and canonical requirements, architecture, README, and acceptance documents relevant to the target.
 2. Inspect `git status` and the exact requested diff. Distinguish staged, unstaged, untracked, branch, commit, or PR scope; do not silently combine them.
 3. Infer the change intent from the request, diff, tests, and history. State assumptions when evidence is incomplete.
-4. Make a compact review plan: target, high-risk surfaces, relevant callers/contracts, checks to run, and excluded dirty files.
+4. Make a compact review plan: target, high-risk surfaces, relevant callers/contracts, documentation and acceptance drift, checks to run, and excluded dirty files.
 
 If Git or the target is unavailable, disclose that limitation. Do not write findings as though a hypothetical diff was inspected.
 
@@ -25,6 +25,7 @@ Prioritize correctness and user impact over style. Examine what applies:
 - API, schema, migration, backend/frontend, and compatibility changes;
 - exception handling, logging, concurrency, performance, security, and privacy;
 - tests: whether they can fail for the regression and cover the changed behavior;
+- documentation: whether confirmed requirements, architecture, repository usage, and acceptance evidence remain accurate without overstating verification or approval;
 - maintainability and unrelated changes only when they create a concrete risk.
 
 For framework/library/API claims, determine the project version and use version-matching official documentation or authoritative pinned artifacts. Current docs do not prove support in an older pinned version. Treat unresolved uncertainty as an open question, not a factual defect.
@@ -63,3 +64,5 @@ Then state test gaps, unrun checks, scope limitations, and residual risk. Never 
 ## Mutation Boundary
 
 If the user also asks to fix findings, finish and deliver the review first, then start a separately scoped implementation workflow with a Plan, Plan Validation, tests, and verification. Preserve unrelated dirty files throughout.
+
+Review is read-only: report documentation drift and invalid acceptance status as findings when material, but do not edit documents or change acceptance state unless the user separately authorizes implementation.
